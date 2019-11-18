@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "sports-poll-front-end-gatsby",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "Dead simple poll system around some sports events which can be fetched from a JSON file, developed with Gatsby",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Baptiste Clarey Sjöstrand",
   "dependencies": {
     "gatsby": "^2.17.11",
     "gatsby-image": "^2.2.31",
@@ -24,7 +24,7 @@
   "keywords": [
     "gatsby"
   ],
-  "license": "MIT",
+  "license": "GPL-3.0-only",
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
@@ -35,9 +35,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/baptistecs/sports-poll-front-end-gatsby"
   },
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/baptistecs/sports-poll-front-end-gatsby/issues"
   }
 }
