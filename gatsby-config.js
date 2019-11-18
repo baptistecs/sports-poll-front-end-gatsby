@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Sports Poll`,
+    description: `Dead simple poll system around some sports events which can be fetched from a JSON file`,
+    author: `@baptistecs`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -18,13 +18,17 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `sports-poll-front-end-gatsby`,
+        short_name: `sports-poll`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
-        display: `minimal-ui`,
+        background_color: `#272727`,
+        theme_color: `#272727`,
+        display: `minimal-ui`, // standalone ?
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        // An optional attribute which provides support for CORS check.
+        // If you do not provide a crossOrigin option, it will skip CORS for manifest.
+        // Any invalid keyword or empty string defaults to `anonymous`
+        // crossOrigin: `use-credentials`,
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
