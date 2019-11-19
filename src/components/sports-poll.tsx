@@ -33,10 +33,32 @@ class SportsPoll extends Component<Props, State> {
       votes: {},
     }
     this.voteHandler = this.voteHandler.bind(this)
+    this.startNewSportPoll = this.startNewSportPoll.bind(this)
   }
 
   async componentDidMount() {
     await this.loadRandomSportEventsAndInitFirstVote()
+  }
+
+  async startNewSportPoll() {
+    this.sportEvents = []
+    this.setState({ votes: {}, sportEvent: undefined })
+    await this.loadRandomSportEventsAndInitFirstVote()
+  }
+
+  removeVotesFromLocalStorage() {
+    if (typeof Storage !== "undefined") {
+      localStorage.removeItem("votes")
+    }
+  }
+
+  onStartNewSportPoll() {
+    this.removeVotesFromLocalStorage()
+    this.startNewSportPoll()
+  }
+
+  onVoteCompleted() {
+    // this.removeVotesFromLocalStorage()
   }
 
   render() {
@@ -59,15 +81,11 @@ class SportsPoll extends Component<Props, State> {
     let nbVote = votesId.length
 
     if (nbVote === this.sportEvents.length) {
-      if (typeof Storage !== "undefined") {
-        localStorage.removeItem("votes")
-      }
-
       return (
         <>
           <SportEvent sportEvent={sportEvent} displayState={false} />
           <VotesResult votes={votes} sportEvents={this.sportEvents} />
-          <Message>Poll over, please refresh to start a new poll</Message>
+          <Button onClick={this.onStartNewSportPoll}>New sport poll</Button>
         </>
       )
     } else {
@@ -80,7 +98,7 @@ class SportsPoll extends Component<Props, State> {
             <SectionTitle>Vote</SectionTitle>
             {state === STATE.FINISHED ? (
               <div>
-                Sorry "{homeName} VS {awayName}" is over{" "}
+                "{homeName} VS {awayName}" is over{" "}
                 <Button onClick={() => this.voteHandler(id, VOTE.OVER)}>
                   Next
                 </Button>
@@ -145,6 +163,10 @@ class SportsPoll extends Component<Props, State> {
         this.setState({ sportEvent: this.sportEvents[i] })
         break
       }
+    }
+
+    if (votesId.length === this.sportEvents.length) {
+      this.onVoteCompleted()
     }
   }
 
@@ -233,6 +255,11 @@ class SportsPoll extends Component<Props, State> {
           nextEventToVoteFor = sportEvents[i]
           break
         }
+      }
+
+      if (!nextEventToVoteFor) {
+        // if all event have a vote, we set the last event
+        nextEventToVoteFor = sportEvents[sportEvents.length - 1]
       }
     } else {
       nextEventToVoteFor = this.sportEvents[0]
