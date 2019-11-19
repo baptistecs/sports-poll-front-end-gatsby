@@ -1,3 +1,3 @@
-type Votes = { [key: string]: string }
+type VotesType = { [key: string]: string }
 
-export default Votes
+export default VotesType

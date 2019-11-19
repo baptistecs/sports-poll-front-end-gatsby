@@ -1,5 +1,5 @@
 import VOTE from "../constants/vote"
 
-type VoteHandler = (id: number, value: VOTE) => void
+type VoteHandlerType = (id: number, value: VOTE) => void
 
-export default VoteHandler
+export default VoteHandlerType

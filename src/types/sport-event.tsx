@@ -1,4 +1,4 @@
-type SportEvent = {
+type SportEventType = {
   id: number
   objectId?: string
   name?: string
@@ -11,4 +11,4 @@ type SportEvent = {
   createdAt?: string
 }
 
-export default SportEvent
+export default SportEventType

@@ -6,24 +6,23 @@ import SectionTitle from "./section-title"
 import VOTE from "../constants/vote"
 import VoteUl from "./vote-ul"
 import VoteLi from "./vote-li"
-import SportEvent from "../types/sport-event"
-import Votes from "../types/votes"
+import SportEventType from "../types/sport-event"
+import VotesType from "../types/votes"
 import Message from "./message"
 import STATE from "../constants/sport-event-state"
 import Button from "./button"
-import Ul from "./section-ul"
-import Li from "./section-li"
+import SportEvent from "./sport-event"
 
 type Props = {}
 type State = {
   loading: boolean
   error: string
-  sportEvent?: SportEvent // event to vote for
-  votes: Votes // WARNING: object properties are ordered by value
+  sportEvent?: SportEventType // event to vote for
+  votes: VotesType // WARNING: object properties are ordered by value
 }
 
 class SportsPoll extends Component<Props, State> {
-  sportEvents: SportEvent[] = [] // not displayed = not in the state
+  sportEvents: SportEventType[] = [] // not displayed = not in the state
 
   constructor(props = {}) {
     super(props)
@@ -65,6 +64,7 @@ class SportsPoll extends Component<Props, State> {
 
       return (
         <>
+          <SportEvent sportEvent={sportEvent} displayState={false} />
           <Section>
             <SectionTitle>Vote results</SectionTitle>
             <ul style={{ listStyle: "none", margin: 0 }}>
@@ -79,31 +79,11 @@ class SportsPoll extends Component<Props, State> {
         </>
       )
     } else {
-      const {
-        id,
-        homeName,
-        awayName,
-        state,
-        country,
-        sport,
-        group,
-      } = sportEvent
+      const { id, homeName, awayName, state } = sportEvent
 
       return (
         <div style={{ padding: "0 5px" }}>
-          <Section>
-            <SectionTitle>Event</SectionTitle>
-            <Ul>
-              <Li key="0">Category: {sport.toLowerCase().replace("_", " ")}</Li>
-              <Li key="1" even={true}>
-                Country: {country.toLowerCase().replace("_", " ")}
-              </Li>
-              <Li key="2">Group: {group}</Li>
-              <Li key="3" even={true}>
-                State: {state.toLowerCase().replace("_", " ")}
-              </Li>
-            </Ul>
-          </Section>
+          <SportEvent sportEvent={sportEvent} />
           <Section>
             <SectionTitle>Vote</SectionTitle>
             {state === STATE.FINISHED ? (
@@ -179,11 +159,11 @@ class SportsPoll extends Component<Props, State> {
     const { SPORT_EVENTS_URL } = process.env
 
     let response: AxiosResponse,
-      sportsEvents: SportEvent[],
+      sportsEvents: SportEventType[],
       sport: string,
-      votes: Votes = {},
+      votes: VotesType = {},
       votesId: string[] = [],
-      nextEventToVoteFor: SportEvent | null = null
+      nextEventToVoteFor: SportEventType | null = null
 
     this.setState({ loading: true })
 
@@ -245,7 +225,7 @@ class SportsPoll extends Component<Props, State> {
     }
 
     // we collect all sport events
-    let sportEvents: SportEvent[] = []
+    let sportEvents: SportEventType[] = []
     sportsEvents.forEach(sportEvent => {
       if (sportEvent.sport === sport) {
         sportEvents.push(sportEvent)
