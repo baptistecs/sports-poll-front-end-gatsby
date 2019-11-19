@@ -17,9 +17,14 @@ import {
 type Props = {
   sportEvents: SportEvent[]
   votes: Votes
+  editSportEvent?: (sportEvent: SportEvent) => void
 }
 
-const VotesResult = ({ sportEvents, votes }: Props) => {
+const VotesResult = ({
+  sportEvents,
+  votes,
+  editSportEvent = undefined,
+}: Props) => {
   const nbSportEvent = sportEvents.length,
     nbVote = Object.keys(votes).length
 
@@ -54,6 +59,9 @@ const VotesResult = ({ sportEvents, votes }: Props) => {
                 last={
                   sportEventsMaxIndex === sportEventIndice ||
                   votesMaxIndex === sportEventIndice
+                }
+                onClick={() =>
+                  editSportEvent ? editSportEvent(sportEvent) : null
                 }
               >
                 <td

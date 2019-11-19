@@ -24,6 +24,7 @@ type State = {
 
 class SportsPoll extends Component<Props, State> {
   sportEvents: SportEventType[] = [] // not displayed = not in the state
+  forceEventEdition = false
 
   constructor(props = {}) {
     super(props)
@@ -34,6 +35,7 @@ class SportsPoll extends Component<Props, State> {
     }
     this.voteHandler = this.voteHandler.bind(this)
     this.onStartNewSportPoll = this.onStartNewSportPoll.bind(this)
+    this.editSportEvent = this.editSportEvent.bind(this)
   }
 
   async componentDidMount() {
@@ -80,11 +82,15 @@ class SportsPoll extends Component<Props, State> {
     let votesId = Object.keys(votes)
     let nbVote = votesId.length
 
-    if (nbVote === this.sportEvents.length) {
+    if (nbVote === this.sportEvents.length && !this.forceEventEdition) {
       return (
         <>
           <SportEvent sportEvent={sportEvent} displayState={false} />
-          <VotesResult votes={votes} sportEvents={this.sportEvents} />
+          <VotesResult
+            votes={votes}
+            sportEvents={this.sportEvents}
+            editSportEvent={this.editSportEvent}
+          />
           <Button onClick={this.onStartNewSportPoll}>New sport poll</Button>
         </>
       )
@@ -134,10 +140,19 @@ class SportsPoll extends Component<Props, State> {
             )}
             <div>Voted: {`${nbVote} / ${this.sportEvents.length}`}</div>
           </Section>
-          <VotesResult votes={votes} sportEvents={this.sportEvents} />
+          <VotesResult
+            votes={votes}
+            sportEvents={this.sportEvents}
+            editSportEvent={this.editSportEvent}
+          />
         </div>
       )
     }
+  }
+
+  editSportEvent(sportEvent: SportEventType) {
+    this.setState({ sportEvent })
+    this.forceEventEdition = true
   }
 
   /**
@@ -168,6 +183,8 @@ class SportsPoll extends Component<Props, State> {
     if (votesId.length === this.sportEvents.length) {
       this.onVoteCompleted()
     }
+
+    this.forceEventEdition = false
   }
 
   async loadRandomSportEventsAndInitFirstVote() {
