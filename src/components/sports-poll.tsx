@@ -57,6 +57,10 @@ class SportsPoll extends Component<Props, State> {
     let nbVote = votesId.length
 
     if (nbVote === this.sportEvents.length) {
+      if (typeof Storage !== "undefined") {
+        localStorage.removeItem("votes")
+      }
+
       return (
         <>
           <Section>
@@ -130,6 +134,9 @@ class SportsPoll extends Component<Props, State> {
     votes[id] = value
     let votesId = Object.keys(votes)
 
+    if (typeof Storage !== "undefined") {
+      localStorage.setItem("votes", JSON.stringify(votes))
+    }
     this.setState({ votes })
 
     // if there is a non finished event without vote it will be the next vote
@@ -148,7 +155,12 @@ class SportsPoll extends Component<Props, State> {
   async loadRandomSportEventsAndInitFirstVote() {
     const { SPORT_EVENTS_URL } = process.env
 
-    let response: AxiosResponse, sportsEvents: SportEvent[], sport: string
+    let response: AxiosResponse,
+      sportsEvents: SportEvent[],
+      sport: string,
+      votes: Votes = {},
+      votesId: string[] = [],
+      nextEventToVoteFor: SportEvent | null = null
 
     this.setState({ loading: true })
 
@@ -171,22 +183,43 @@ class SportsPoll extends Component<Props, State> {
       return
     }
 
-    // we collect all types of sport
-    let sports: string[] = []
-    sportsEvents.forEach(sportEvent => {
-      if (sportEvent.sport && sports.indexOf(sportEvent.sport) === -1) {
-        sports.push(sportEvent.sport)
+    if (typeof Storage !== "undefined") {
+      // localStorage.setItem("sportsEvents", JSON.stringify(sportsEvents))
+      let votesStr = localStorage.getItem("votes")
+      if (votesStr) {
+        votes = JSON.parse(votesStr)
+        votesId = Object.keys(votes)
       }
-    })
-
-    if (!sports.length) {
-      this.setState({ loading: false, error: "no sport found" })
-      return
     }
 
-    // we pick a type of sport
-    let sportIndex = Math.floor(Math.random() * sports.length)
-    sport = sports[sportIndex]
+    if (votesId.length) {
+      let firstVoteId = Number(votesId[0])
+      for (let i = 0; i < sportsEvents.length; i++) {
+        if (sportsEvents[i].id === firstVoteId) {
+          sport = sportsEvents[i].sport
+          break
+        }
+      }
+    } else {
+      // we collect all types of sport
+      let sports: string[] = []
+      sportsEvents.forEach(sportEvent => {
+        if (sportEvent.sport && sports.indexOf(sportEvent.sport) === -1) {
+          sports.push(sportEvent.sport)
+        }
+      })
+
+      if (!sports.length) {
+        this.setState({ loading: false, error: "no sport found" })
+        return
+      }
+
+      // we pick a type of sport
+      let sportIndex = Math.floor(Math.random() * sports.length)
+      sport = sports[sportIndex]
+
+      votes = {}
+    }
 
     // we collect all sport events
     let sportEvents: SportEvent[] = []
@@ -197,9 +230,22 @@ class SportsPoll extends Component<Props, State> {
     })
     this.sportEvents = sportEvents
 
+    if (votesId.length) {
+      // we look for the next event with the same sport
+      for (let i = 0; i < sportEvents.length; i++) {
+        if (votesId.indexOf(sportEvents[i].id.toString()) === -1) {
+          nextEventToVoteFor = sportEvents[i]
+          break
+        }
+      }
+    } else {
+      nextEventToVoteFor = this.sportEvents[0]
+    }
+
     this.setState({
       loading: false,
-      sportEvent: this.sportEvents[0],
+      sportEvent: nextEventToVoteFor ? nextEventToVoteFor : undefined,
+      votes,
     })
   }
 }
