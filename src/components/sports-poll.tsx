@@ -11,6 +11,8 @@ import Votes from "../types/votes"
 import Message from "./message"
 import STATE from "../constants/sport-event-state"
 import Button from "./button"
+import Ul from "./section-ul"
+import Li from "./section-li"
 
 type Props = {}
 type State = {
@@ -77,10 +79,31 @@ class SportsPoll extends Component<Props, State> {
         </>
       )
     } else {
-      const { id, homeName, awayName, state } = sportEvent
+      const {
+        id,
+        homeName,
+        awayName,
+        state,
+        country,
+        sport,
+        group,
+      } = sportEvent
 
       return (
         <div style={{ padding: "0 5px" }}>
+          <Section>
+            <SectionTitle>Event</SectionTitle>
+            <Ul>
+              <Li key="0">Category: {sport.toLowerCase().replace("_", " ")}</Li>
+              <Li key="1" even={true}>
+                Country: {country.toLowerCase().replace("_", " ")}
+              </Li>
+              <Li key="2">Group: {group}</Li>
+              <Li key="3" even={true}>
+                State: {state.toLowerCase().replace("_", " ")}
+              </Li>
+            </Ul>
+          </Section>
           <Section>
             <SectionTitle>Vote</SectionTitle>
             {state === STATE.FINISHED ? (
