@@ -12,6 +12,7 @@ import Message from "./message"
 import STATE from "../constants/sport-event-state"
 import Button from "./button"
 import SportEvent from "./sport-event"
+import VotesResult from "./votes-result"
 
 type Props = {}
 type State = {
@@ -65,16 +66,7 @@ class SportsPoll extends Component<Props, State> {
       return (
         <>
           <SportEvent sportEvent={sportEvent} displayState={false} />
-          <Section>
-            <SectionTitle>Vote results</SectionTitle>
-            <ul style={{ listStyle: "none", margin: 0 }}>
-              {votesId.map(voteId => (
-                <li key={voteId} style={{ margin: 0 }}>
-                  {voteId}: {votes[voteId]}
-                </li>
-              ))}
-            </ul>
-          </Section>
+          <VotesResult votes={votes} sportEvents={this.sportEvents} />
           <Message>Poll over, please refresh to start a new poll</Message>
         </>
       )
@@ -124,6 +116,7 @@ class SportsPoll extends Component<Props, State> {
             )}
             <div>Voted: {`${nbVote} / ${this.sportEvents.length}`}</div>
           </Section>
+          <VotesResult votes={votes} sportEvents={this.sportEvents} />
         </div>
       )
     }
