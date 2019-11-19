@@ -33,7 +33,7 @@ class SportsPoll extends Component<Props, State> {
       votes: {},
     }
     this.voteHandler = this.voteHandler.bind(this)
-    this.startNewSportPoll = this.startNewSportPoll.bind(this)
+    this.onStartNewSportPoll = this.onStartNewSportPoll.bind(this)
   }
 
   async componentDidMount() {
