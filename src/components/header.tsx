@@ -1,36 +1,17 @@
 import { Link } from "gatsby"
-import PropTypes from "prop-types"
 import React from "react"
+import * as Style from "../styles/header"
+import { FontAwesomeIcon as FA } from "@fortawesome/react-fontawesome"
+import { faHome } from "@fortawesome/free-solid-svg-icons"
 
 type Props = { title: string }
 
-const Header = ({ title = "" }: Props) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {title}
-        </Link>
-      </h1>
-    </div>
+export default ({ title }: Props) => (
+  <header style={Style.header}>
+    <h1 style={Style.h1}>
+      <Link to="/" style={Style.link}>
+        <FA icon={faHome} /> {title}
+      </Link>
+    </h1>
   </header>
 )
-
-export default Header

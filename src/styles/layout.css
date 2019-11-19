@@ -575,10 +575,11 @@ th {
   -moz-font-feature-settings: "tnum";
   -ms-font-feature-settings: "tnum";
   -webkit-font-feature-settings: "tnum";
-  padding-left: 0.96667rem;
+  /* padding-left: 0.96667rem;
   padding-right: 0.96667rem;
   padding-top: 0.725rem;
-  padding-bottom: calc(0.725rem - 1px);
+  padding-bottom: calc(0.725rem - 1px); */
+  padding: 0;
 }
 th:first-child,
 td:first-child {
@@ -619,4 +620,31 @@ pre tt:after {
   html {
     font-size: 100%;
   }
+}
+
+html {
+  height: 100%;
+  /* background: url(https://image.freepik.com/free-vector/abstract-sport-background-with-blue-waves_23-2148232917.jpg); */
+  background: #272727 url(../images/background.jpg) center center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+body {
+  height: 100%;
+}
+a,
+a:visited,
+a:hover {
+  color: #639;
+}
+
+footer a,
+footer :visited,
+footer a:hover {
+  color: #fff;
+  /* text-shadow: #fff 0 0 5px; */
+}
+
+footer a:hover {
+  text-decoration: none;
 }

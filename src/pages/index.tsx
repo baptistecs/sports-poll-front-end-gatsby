@@ -1,11 +1,12 @@
 import React from "react"
 import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Section from "../components/section"
+import SectionTitle from "../components/section-title"
 
 export default () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    Welcome home
+  <Layout title="You betcha!">
+    <Section>
+      <SectionTitle>Welcome home</SectionTitle>Some content
+    </Section>
   </Layout>
 )

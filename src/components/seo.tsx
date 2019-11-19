@@ -1,13 +1,6 @@
-/**
- * SEO component that queries for data with
- *  Gatsby's useStaticQuery React hook
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import React from "react"
 import Helmet from "react-helmet"
-import { useStaticQuery, graphql } from "gatsby"
+import { useStaticQuery, graphql } from "gatsby" // https://www.gatsbyjs.org/docs/use-static-query/
 
 type Props = {
   title: string
@@ -30,7 +23,6 @@ export default ({ title, description = "", lang = "en", meta = [] }: Props) => {
       }
     `
   )
-
   const metaDescription = description || site.siteMetadata.description
 
   return (
