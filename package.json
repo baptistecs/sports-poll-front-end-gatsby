@@ -2,7 +2,7 @@
   "name": "sports-poll-front-end-gatsby",
   "private": true,
   "description": "Dead simple poll system around some sports events which can be fetched from a JSON file, developed with Gatsby",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": "Baptiste Clarey Sjöstrand",
   "dependencies": {
     "@emotion/core": "^10.0.22",
@@ -46,7 +46,13 @@
     "typescript": "^3.7.2"
   },
   "keywords": [
-    "gatsby"
+    "gatsby",
+    "react",
+    "graphql",
+    "frontend",
+    "sports",
+    "poll",
+    "glomo"
   ],
   "license": "GPL-3.0-only",
   "scripts": {
