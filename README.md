@@ -28,7 +28,7 @@ Description
 
 ### Clone or download the repository from Github
 
-Check the "Clone or download" green button on the [repository page](https://github.com/baptistecs/sport-poll-front-end-gatsby/tree/master).
+Check the "Clone or download" green button on the [repository page](https://github.com/baptistecs/sports-poll-front-end-gatsby/tree/master).
 
 ### Go to the project root directory
 
@@ -54,7 +54,14 @@ Run `gatsby develop` and follow the instructions (open http://localhost:8000/)
 
 ## TODO
 
-...
+- [x] Make vote editable
+- [x] Votes persistance in the local storage
+- [x] Offline mode with service worker
+- [ ] Add flags for the countries
+- [ ] Add icon for the type sports
+- [ ] Change icon in gatsby-config.js
+- [ ] Custom 404 (with service worker)
+- [ ] Improve accessibility
 
 ## Gatsby projects
 
