@@ -26,11 +26,20 @@
     "react-helmet": "^5.2.1"
   },
   "devDependencies": {
+    "@testing-library/react": "^9.3.2",
+    "@types/jest": "^24.0.23",
     "@types/react": "^16.9.11",
     "@types/react-dom": "^16.9.4",
     "@types/react-helmet": "^5.0.14",
+    "@types/react-test-renderer": "^16.9.1",
+    "babel-jest": "^24.9.0",
+    "babel-preset-gatsby": "^0.2.22",
     "gatsby-plugin-typescript": "^2.1.18",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^24.9.0",
     "prettier": "^1.19.1",
+    "react-test-renderer": "^16.12.0",
+    "ts-jest": "^24.1.0",
     "tslint": "^5.20.1",
     "tslint-config-prettier": "^1.18.0",
     "tslint-react": "^4.1.0",
@@ -46,7 +55,8 @@
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "jest --verbose",
+    "test:watch": "jest --verbose --watch"
   },
   "repository": {
     "type": "git",

@@ -84,7 +84,7 @@ class SportsPoll extends Component<Props, State> {
 
     if (nbVote === this.sportEvents.length && !this.forceEventEdition) {
       return (
-        <>
+        <div style={{ padding: "0 5px" }}>
           <SportEvent sportEvent={sportEvent} displayState={false} />
           <VotesResult
             votes={votes}
@@ -92,7 +92,7 @@ class SportsPoll extends Component<Props, State> {
             editSportEvent={this.editSportEvent}
           />
           <Button onClick={this.onStartNewSportPoll}>New sport poll</Button>
-        </>
+        </div>
       )
     } else {
       const { id, homeName, awayName, state } = sportEvent
@@ -187,11 +187,14 @@ class SportsPoll extends Component<Props, State> {
     this.forceEventEdition = false
   }
 
+  static async getData(url: string): Promise<any> {
+    return Axios.get(url).then((resp: AxiosResponse) => resp.data)
+  }
+
   async loadRandomSportEventsAndInitFirstVote() {
     const { SPORT_EVENTS_URL } = process.env
 
-    let response: AxiosResponse,
-      sportsEvents: SportEventType[],
+    let sportsEvents: SportEventType[],
       sport: string,
       votes: VotesType = {},
       votesId: string[] = [],
@@ -205,13 +208,11 @@ class SportsPoll extends Component<Props, State> {
     }
 
     try {
-      response = await Axios.get(SPORT_EVENTS_URL)
+      sportsEvents = await SportsPoll.getData(SPORT_EVENTS_URL)
     } catch (error) {
       this.setState({ loading: false, error })
       return
     }
-
-    sportsEvents = response.data
 
     if (!sportsEvents || !sportsEvents.length) {
       this.setState({ loading: false, error: "wrong data fetched" })

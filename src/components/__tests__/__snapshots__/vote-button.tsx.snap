@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VoteButton renders correctly with label 1`] = `
+<button
+  onClick={[Function]}
+  style={
+    Object {
+      "background": "#fff",
+      "border": "1px solid #fff",
+      "borderRadius": 10,
+      "color": "#000",
+      "cursor": "pointer",
+      "display": "inline-block",
+      "height": "100%",
+      "overflowY": "auto",
+      "width": "100%",
+    }
+  }
+>
+  Draw
+</button>
+`;
+
+exports[`VoteButton renders correctly without label 1`] = `
+<button
+  onClick={[Function]}
+  style={
+    Object {
+      "background": "#fff",
+      "border": "1px solid #fff",
+      "borderRadius": 10,
+      "color": "#000",
+      "cursor": "pointer",
+      "display": "inline-block",
+      "height": "100%",
+      "overflowY": "auto",
+      "width": "100%",
+    }
+  }
+>
+  D
+</button>
+`;
