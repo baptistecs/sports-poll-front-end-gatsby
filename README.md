@@ -1,6 +1,6 @@
 # Sports Poll
 
-Description
+Dead simple poll system around some sports events which can be fetched from a JSON file, developed with Gatsby
 
 ## Table of Contents
 
